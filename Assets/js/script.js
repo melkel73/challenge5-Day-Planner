@@ -10,51 +10,70 @@ var period = "AM";
 var timeslots = [8,9,10,11,12,13,14,15,16,17];
 
 
+//populate the header with date
 $("#currentDay").text(today.format('MMM D, YYYY'));
 console.log(curhour);
 
+
 for (i = 0; i < 10; i++) {
+  console.log(timeslots[i]);
   if (i < 4) {  period = "AM"} else {period = "PM"};
+  if (timeslots[i] >= 13) { tSlot = timeslots[i] - 12} else { tSlot = timeslots[i]}
   var newslot = $('<div>');
   var newslot2 = $('<div>');
   var newtext = $('<textarea>');
   var newBtn = $('<button>');
   var newI = $('<i>');
+  var checkStor = 'hour-' + tSlot;
   
   if (curhour > timeslots[i]) {
-    newslot.attr('class','row time-block-past');
-    
+    newslot.attr('class','row time-block past');
   }
   else if (curhour == timeslots[i]) {
-    newslot.attr('class','row time-block-present');
+    newslot.attr('class','row time-block present');
    }
    else if (curhour < timeslots[i]) {
     newslot.attr('class','row time-block future');
    }
-  newslot.attr('id','hour-'+timeslots[i]);
+  newslot.attr('id','hour-'+tSlot);
   newslot2.attr('class','col2 col-md-1 hour text-center py3');
-  
-  newslot2.text(timeslots[i]+period);
+  newslot2.text(tSlot+period);
   newtext.attr('class','col-8 col-md-10 description');
   newtext.attr('rows',3);
   newBtn.attr('class','btn saveBtn col-2 col-md-1');
   newBtn.attr('aria-label','save');
+  newI.attr('class','fas fa-save');
+  newI.attr('aria-hidden','true');
 
   mainEl.append(newslot);
   newslot.append(newslot2);
   newslot.append(newtext);
   newslot.append(newBtn);
   newBtn.append(newI);
+  newBtn.addEventlistener
+  
+  if (JSON.parse(localStorage.getItem('saveTS')) == $(newtext).attr('id')) {
+
+  }
 }
 
+
+
+$("button").click(function(){
+  var savetime = $(this).parent('div').attr('id');
+  var textToSave = $(this).parent('div').children('textarea').val();
+  var saveTS = { hourTS: savetime,
+                 textToSave: textToSave};
+  console.log(savetime); console.log(textToSave);
+  console.log(JSON.stringify(saveTS));
+
+  localStorage.setItem('saveTS',JSON.stringify(saveTS));
+  localStorage.setItem[]
+  console.log(JSON.parse(localStorage.getItem('saveTS')));
+});
+
 $(function () {
-//   <div id="hour-9" class="row time-block past">
-//   <div class="col-2 col-md-1 hour text-center py-3">9AM</div>
-//   <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
-//   <button class="btn saveBtn col-2 col-md-1" aria-label="save">
-//     <i class="fas fa-save" aria-hidden="true"></i>
-//   </button>
-// </div>
+
 
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
