@@ -2,7 +2,7 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 var today = dayjs();
-var curhour = dayjs().format('hh');
+var curhour = dayjs().format('HH');
 
 var dateEl = document.getElementById("#currentDay");
 var mainEl = $('#main');
@@ -51,9 +51,10 @@ for (i = 0; i < 10; i++) {
   newslot.append(newBtn);
   newBtn.append(newI);
   newBtn.addEventlistener
-  
-  if (JSON.parse(localStorage.getItem('saveTS')) == $(newtext).attr('id')) {
-
+  resultObj = JSON.parse(localStorage.getItem(checkStor) !== null);
+  console.log(resultObj.hourTS);
+  if (resultObj.hourTS  == checkStor ) {
+      newslot.text(resultObj.textToSave)
   }
 }
 
@@ -66,10 +67,10 @@ $("button").click(function(){
                  textToSave: textToSave};
   console.log(savetime); console.log(textToSave);
   console.log(JSON.stringify(saveTS));
-
-  localStorage.setItem('saveTS',JSON.stringify(saveTS));
-  localStorage.setItem[]
-  console.log(JSON.parse(localStorage.getItem('saveTS')));
+  console.log(timeslots[i]);
+  localStorage.setItem(saveTS,JSON.stringify(saveTS));
+  
+  console.log(JSON.parse(localStorage.getItem(saveTS)));
 });
 
 $(function () {
