@@ -51,10 +51,14 @@ for (i = 0; i < 10; i++) {
   newslot.append(newBtn);
   newBtn.append(newI);
   newBtn.addEventlistener
-  resultObj = JSON.parse(localStorage.getItem(checkStor) !== null);
-  console.log(resultObj.hourTS);
-  if (resultObj.hourTS  == checkStor ) {
-      newslot.text(resultObj.textToSave)
+  console.log(checkStor)
+  // console.log(JSON.parse(localStorage.getItem(checkStor)))
+  //  resultObj = JSON.parse(localStorage.getItem(checkStor) );
+  // console.log(resultObj);
+  if ( localStorage.getItem(checkStor) !== null ) {
+     newresultObj = localStorage.getItem(checkStor) ;
+    console.log(localStorage.getItem(checkStor) + "True" + checkStor);
+    newtext.text(localStorage.getItem(checkStor));
   }
 }
 
@@ -63,14 +67,14 @@ for (i = 0; i < 10; i++) {
 $("button").click(function(){
   var savetime = $(this).parent('div').attr('id');
   var textToSave = $(this).parent('div').children('textarea').val();
-  var saveTS = { hourTS: savetime,
-                 textToSave: textToSave};
+  // var saveTS = { hourTS: savetime,
+  //                textToSave: textToSave};
   console.log(savetime); console.log(textToSave);
-  console.log(JSON.stringify(saveTS));
-  console.log(timeslots[i]);
-  localStorage.setItem(saveTS,JSON.stringify(saveTS));
+  // console.log(JSON.stringify(saveTS));
+  // console.log(timeslots[i]);
+  localStorage.setItem(savetime,textToSave);
   
-  console.log(JSON.parse(localStorage.getItem(saveTS)));
+  console.log(localStorage.getItem(savetime) + "here");
 });
 
 $(function () {
