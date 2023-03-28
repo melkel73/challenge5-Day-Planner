@@ -4,7 +4,7 @@
 var today = dayjs();
 var curhour = dayjs().format('HH');
 
-var dateEl = document.getElementById("#currentDay");
+var dateEl = $("#currentDay");
 var mainEl = $('#main');
 var period = "AM";
 var timeslots = [8,9,10,11,12,13,14,15,16,17];
@@ -25,7 +25,7 @@ for (i = 0; i < 10; i++) {
   var newBtn = $('<button>');
   var newI = $('<i>');
   var checkStor = 'hour-' + tSlot;
-  
+  //compare current time to see how to color the slot with styling
   if (curhour > timeslots[i]) {
     newslot.attr('class','row time-block past');
   }
@@ -44,7 +44,7 @@ for (i = 0; i < 10; i++) {
   newBtn.attr('aria-label','save');
   newI.attr('class','fas fa-save');
   newI.attr('aria-hidden','true');
-
+//append the new attributes
   mainEl.append(newslot);
   newslot.append(newslot2);
   newslot.append(newtext);
@@ -52,9 +52,7 @@ for (i = 0; i < 10; i++) {
   newBtn.append(newI);
   newBtn.addEventlistener
   console.log(checkStor)
-  // console.log(JSON.parse(localStorage.getItem(checkStor)))
-  //  resultObj = JSON.parse(localStorage.getItem(checkStor) );
-  // console.log(resultObj);
+ //if there is local storage for that item populate it for that tie slot
   if ( localStorage.getItem(checkStor) !== null ) {
      newresultObj = localStorage.getItem(checkStor) ;
     console.log(localStorage.getItem(checkStor) + "True" + checkStor);
@@ -63,7 +61,7 @@ for (i = 0; i < 10; i++) {
 }
 
 
-
+//save the event to storate when save button clicked
 $("button").click(function(){
   var savetime = $(this).parent('div').attr('id');
   var textToSave = $(this).parent('div').children('textarea').val();
